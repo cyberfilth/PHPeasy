@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 384
+  Left = 349
   Height = 510
-  Top = 120
+  Top = 131
   Width = 761
   Caption = 'PHPeasy'
   ClientHeight = 490
@@ -461,8 +461,8 @@ object Form1: TForm1
     SelectedColor.UnderlinePriority = 50
     SelectedColor.StrikeOutPriority = 50
     BracketHighlightStyle = sbhsBoth
-    BracketMatchColor.Background = clNone
-    BracketMatchColor.Foreground = clNone
+    BracketMatchColor.Background = 7501089
+    BracketMatchColor.Foreground = 16448250
     BracketMatchColor.Style = [fsBold]
     FoldedCodeColor.Background = clNone
     FoldedCodeColor.Foreground = clGray
@@ -714,6 +714,8 @@ object Form1: TForm1
     top = 64
   end
   object dlgSave: TSaveDialog
+    DefaultExt = '.php'
+    Filter = 'PHP file (*.php)|*.php|HTML file (*.html)|*.html|Any file|*.*'
     left = 235
     top = 64
   end
