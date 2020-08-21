@@ -710,6 +710,8 @@ object Form1: TForm1
     end
   end
   object dlgOpen: TOpenDialog
+    DefaultExt = '.php'
+    Filter = 'PHP files (*.php)|*.php|HTML files (*.html)|*.html|Any files (*.*)|*.*'
     left = 161
     top = 64
   end
