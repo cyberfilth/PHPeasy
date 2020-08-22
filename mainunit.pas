@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Dialogs, ComCtrls, Menus,
-  SynEdit, SynHighlighterPHP, SynCompletion, lcltype;
+  SynEdit, SynHighlighterPHP, SynCompletion, lcltype, XMLPropStorage;
 
 type
 
@@ -61,6 +61,7 @@ type
     tbtnDivider3: TToolButton;
     tbtnSearch: TToolButton;
     tbtnReplace: TToolButton;
+    XMLPropStorage1: TXMLPropStorage;
     procedure editWindowChange(Sender: TObject);
     procedure FindDialog1Find(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -199,6 +200,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   isSaved := True;
+  XMLPropStorage1.FileName := GetUserDir+'PHPeasySettings.xml';
 end;
 
 procedure TForm1.mnuOpenClick(Sender: TObject);
@@ -418,7 +420,7 @@ end;
 (* Academy dark theme *)
 procedure TForm1.themeAcademyClick(Sender: TObject);
 begin
-  editWindow.Color:=$2F1E20;
+  editWindow.Color := $2F1E20;
   SynPHPSyn1.CommentAttri.Foreground := $7B7473;
   SynPHPSyn1.IdentifierAttri.Foreground := $7656D1;
   SynPHPSyn1.KeyAttri.Foreground := $F3C2AA;
@@ -431,7 +433,7 @@ end;
 (* PeaGreen light theme *)
 procedure TForm1.themePeaGreenClick(Sender: TObject);
 begin
-  editWindow.Color:=$FAFAFA;
+  editWindow.Color := $FAFAFA;
   SynPHPSyn1.CommentAttri.Foreground := $5B805C;
   SynPHPSyn1.IdentifierAttri.Foreground := $A2502A;
   SynPHPSyn1.KeyAttri.Foreground := $722674;

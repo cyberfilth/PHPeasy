@@ -8,6 +8,7 @@ object Form1: TForm1
   ClientWidth = 761
   Menu = mnmnuEditor
   OnCreate = FormCreate
+  SessionProperties = 'Height;Left;Top;Width;SynPHPSyn1.CommentAttri;SynPHPSyn1.IdentifierAttri;SynPHPSyn1.InvalidSymbolAttri;SynPHPSyn1.KeyAttri;SynPHPSyn1.NumberAttri;SynPHPSyn1.StringAttri;SynPHPSyn1.SymbolAttri;SynPHPSyn1.VariableAttri;editWindow.Color'
   LCLVersion = '2.0.6.0'
   inline editWindow: TSynEdit
     Left = 0
@@ -1175,5 +1176,10 @@ object Form1: TForm1
     ToggleReplaceWhole = False
     left = 638
     top = 64
+  end
+  object XMLPropStorage1: TXMLPropStorage
+    StoredValues = <>
+    left = 101
+    top = 141
   end
 end
