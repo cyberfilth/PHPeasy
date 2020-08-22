@@ -1146,4 +1146,20 @@ object Form1: TForm1
     left = 537
     top = 64
   end
+  object SynCompletion1: TSynCompletion
+    OnExecute = SynCompletion1Execute
+    Position = 0
+    LinesInWindow = 6
+    SelectedColor = clHighlight
+    CaseSensitive = False
+    Width = 262
+    AutoUseSingleIdent = True
+    ShortCut = 16416
+    EndOfTokenChr = '()[].'
+    ExecCommandID = ecSynCompletionExecute
+    Editor = editWindow
+    ToggleReplaceWhole = False
+    left = 638
+    top = 64
+  end
 end

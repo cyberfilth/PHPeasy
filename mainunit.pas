@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Dialogs, ComCtrls, Menus,
-  SynEdit, SynHighlighterPHP, lcltype;
+  SynEdit, SynHighlighterPHP, SynCompletion, lcltype;
 
 type
 
@@ -41,6 +41,7 @@ type
     dlgSave: TSaveDialog;
     ReplaceDialog1: TReplaceDialog;
     sbarStatus: TStatusBar;
+    SynCompletion1: TSynCompletion;
     SynPHPSyn1: TSynPHPSyn;
     tbarMain: TToolBar;
     tbtnNew: TToolButton;
@@ -77,6 +78,7 @@ type
     procedure ReplaceDialog1Replace(Sender: TObject);
     procedure savePrompt;
     procedure setSelLength(var textComponent: TSynEdit; newValue: integer);
+    procedure SynCompletion1Execute(Sender: TObject);
   private
 
   public
@@ -339,6 +341,72 @@ end;
 procedure TForm1.setSelLength(var textComponent: TSynEdit; newValue: integer);
 begin
   textComponent.SelEnd := textComponent.SelStart + newValue;
+end;
+
+procedure TForm1.SynCompletion1Execute(Sender: TObject);
+
+  procedure Add(s: string);
+  begin
+    if pos(lowercase(SynCompletion1.CurrentString), lowercase(s)) = 1 then
+      SynCompletion1.ItemList.Add(s);
+  end;
+
+begin
+  SynCompletion1.ItemList.Clear;
+  Add('bool');
+  Add('echo');
+  Add('else');
+  Add('elseif');
+  Add('empty()');
+  Add('enddeclare');
+  Add('endfor');
+  Add('endforeach');
+  Add('endif');
+  Add('endswitch');
+  Add('endwhile');
+  Add('eval()');
+  Add('exit()');
+  Add('extends');
+  Add('false');
+  Add('final');
+  Add('finally');
+  Add('float');
+  Add('for');
+  Add('foreach');
+  Add('function');
+  Add('global');
+  Add('goto');
+  Add('implements');
+  Add('include');
+  Add('include_once');
+  Add('instanceof');
+  Add('insteadof');
+  Add('interface');
+  Add('isset()');
+  Add('iterable');
+  Add('list()');
+  Add('namespace');
+  Add('new');
+  Add('null');
+  Add('object');
+  Add('print');
+  Add('private');
+  Add('protected');
+  Add('public');
+  Add('require');
+  Add('require_once');
+  Add('return');
+  Add('static');
+  Add('string');
+  Add('switch');
+  Add('throw');
+  Add('trait');
+  Add('true');
+  Add('unset()');
+  Add('void');
+  Add('while');
+  Add('yield');
+  Add('yield_from');
 end;
 
 end.
