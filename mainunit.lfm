@@ -7,6 +7,7 @@ object Form1: TForm1
   ClientHeight = 490
   ClientWidth = 761
   Menu = mnmnuEditor
+  OnCreate = FormCreate
   LCLVersion = '2.0.6.0'
   inline editWindow: TSynEdit
     Left = 0
@@ -471,6 +472,7 @@ object Form1: TForm1
     MouseLinkColor.Foreground = clBlue
     LineHighlightColor.Background = clNone
     LineHighlightColor.Foreground = clNone
+    OnChange = editWindowChange
     inline SynLeftGutterPartList1: TSynGutterPartList
       object SynGutterMarks1: TSynGutterMarks
         Width = 24

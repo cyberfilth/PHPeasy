@@ -12,15 +12,18 @@
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True"/>
+        <TextName Value="PHPeasy"/>
+        <TextDesc Value="Light PHP editor"/>
       </XPManifest>
       <Icon Value="0"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="1"/>
       <Language Value="0809"/>
       <Attributes pvaDebug="True"/>
-      <StringTable Comments="Light code editor for PHP" ProductName="PHPeasy"/>
+      <StringTable Comments="Light code editor for PHP" CompanyName="Chris Hawkins" ProductName="PHPeasy"/>
     </VersionInfo>
     <BuildModes Count="3">
       <Item1 Name="Default" Default="True"/>

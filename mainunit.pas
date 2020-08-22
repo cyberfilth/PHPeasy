@@ -48,6 +48,8 @@ type
     tbtnCut: TToolButton;
     tbtnCopy: TToolButton;
     tbtnPaste: TToolButton;
+    procedure editWindowChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
     procedure mnuCutClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
@@ -60,10 +62,12 @@ type
     procedure mnuSaveClick(Sender: TObject);
     procedure mnuToolbarClick(Sender: TObject);
     procedure mnuUndoClick(Sender: TObject);
+    procedure savePrompt;
   private
 
   public
     sFileName: string;
+    isSaved: boolean;
   end;
 
 var
@@ -77,13 +81,19 @@ implementation
 
 procedure TForm1.mnuNewClick(Sender: TObject);
 begin
+  if isSaved = False then
+    savePrompt;
   sFileName := '';
   editWindow.Lines.Clear;
   sbarStatus.SimpleText := '';
+  isSaved := True;
+  Form1.Caption := 'PHPeasy';
 end;
 
 procedure TForm1.mnuExitClick(Sender: TObject);
 begin
+  if isSaved = False then
+    savePrompt;
   Close;
 end;
 
@@ -109,13 +119,31 @@ begin
   editWindow.CopyToClipboard;
 end;
 
+procedure TForm1.editWindowChange(Sender: TObject);
+begin
+  if (isSaved = True) then
+  begin
+    isSaved := False;
+    Form1.Caption := 'PHPeasy *';
+  end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  isSaved := True;
+end;
+
 procedure TForm1.mnuOpenClick(Sender: TObject);
 begin
+  if isSaved = False then
+    savePrompt;
   if dlgOpen.Execute then
   begin
     sFileName := dlgOpen.FileName;
     editWindow.Lines.LoadFromFile(sFileName);
     sbarStatus.SimpleText := ExtractFileName(sFileName);
+    isSaved := True;
+    Form1.Caption := 'PHPeasy';
   end;
 end;
 
@@ -131,6 +159,8 @@ begin
     sFileName := dlgSave.FileName;
     editWindow.Lines.SaveToFile(sFileName);
     sbarStatus.SimpleText := ExtractFileName(sFileName);
+    isSaved := True;
+    Form1.Caption := 'PHPeasy';
   end;
 end;
 
@@ -139,7 +169,11 @@ begin
   if Length(sFileName) = 0 then
     mnuSaveAsClick(Sender)
   else
+  begin
     editWindow.Lines.SaveToFile(sFileName);
+    isSaved := True;
+    Form1.Caption := 'PHPeasy';
+  end;
 end;
 
 procedure TForm1.mnuToolbarClick(Sender: TObject);
@@ -151,6 +185,13 @@ end;
 procedure TForm1.mnuUndoClick(Sender: TObject);
 begin
   editWindow.Undo;
+end;
+
+procedure TForm1.savePrompt; // If file has been amended but not saved
+begin
+  if MessageDlg('Save changes?', 'Do you want to save this file?',
+    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    mnuSaveClick(nil);
 end;
 
 end.
