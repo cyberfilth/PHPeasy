@@ -81,6 +81,8 @@ implementation
 
 procedure TForm1.mnuNewClick(Sender: TObject);
 begin
+  if isSaved = False then
+    savePrompt;
   sFileName := '';
   editWindow.Lines.Clear;
   sbarStatus.SimpleText := '';
@@ -90,7 +92,8 @@ end;
 
 procedure TForm1.mnuExitClick(Sender: TObject);
 begin
-  savePrompt;
+  if isSaved = False then
+    savePrompt;
   Close;
 end;
 
@@ -132,6 +135,8 @@ end;
 
 procedure TForm1.mnuOpenClick(Sender: TObject);
 begin
+  if isSaved = False then
+    savePrompt;
   if dlgOpen.Execute then
   begin
     sFileName := dlgOpen.FileName;
