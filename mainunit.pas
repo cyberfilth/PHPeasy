@@ -5,8 +5,8 @@ unit mainUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls, Menus,
-  SynEdit, SynHighlighterPHP;
+  Classes, SysUtils, Forms, Controls, Dialogs, ComCtrls, Menus,
+  SynEdit, SynHighlighterPHP, lcltype;
 
 type
 
@@ -14,7 +14,11 @@ type
 
   TForm1 = class(TForm)
     editWindow: TSynEdit;
+    FindDialog1: TFindDialog;
     lstImages: TImageList;
+    dividerX: TMenuItem;
+    mnuReplace: TMenuItem;
+    mnuFind: TMenuItem;
     mnmnuEditor: TMainMenu;
     FileMenu: TMenuItem;
     divider: TMenuItem;
@@ -35,6 +39,7 @@ type
     MenuItem4: TMenuItem;
     dlgOpen: TOpenDialog;
     dlgSave: TSaveDialog;
+    ReplaceDialog1: TReplaceDialog;
     sbarStatus: TStatusBar;
     SynPHPSyn1: TSynPHPSyn;
     tbarMain: TToolBar;
@@ -49,25 +54,33 @@ type
     tbtnCopy: TToolButton;
     tbtnPaste: TToolButton;
     procedure editWindowChange(Sender: TObject);
+    procedure FindDialog1Find(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
     procedure mnuCutClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
+    procedure mnuFindClick(Sender: TObject);
     procedure mnuHintsClick(Sender: TObject);
     procedure mnuLineClick(Sender: TObject);
     procedure mnuNewClick(Sender: TObject);
     procedure mnuOpenClick(Sender: TObject);
     procedure mnuPasteClick(Sender: TObject);
+    procedure mnuReplaceClick(Sender: TObject);
     procedure mnuSaveAsClick(Sender: TObject);
     procedure mnuSaveClick(Sender: TObject);
     procedure mnuToolbarClick(Sender: TObject);
     procedure mnuUndoClick(Sender: TObject);
+    procedure ReplaceDialog1Find(Sender: TObject);
+    procedure ReplaceDialog1Replace(Sender: TObject);
     procedure savePrompt;
+    procedure setSelLength(var textComponent: TSynEdit; newValue: integer);
   private
 
   public
     sFileName: string;
     isSaved: boolean;
+    fPos: integer;
+    found: boolean;
   end;
 
 var
@@ -95,6 +108,12 @@ begin
   if isSaved = False then
     savePrompt;
   Close;
+end;
+
+procedure TForm1.mnuFindClick(Sender: TObject);
+begin
+  FPos := 0;
+  findDialog1.Execute;
 end;
 
 procedure TForm1.mnuHintsClick(Sender: TObject);
@@ -128,6 +147,44 @@ begin
   end;
 end;
 
+procedure TForm1.FindDialog1Find(Sender: TObject);
+var
+  FindS: string;
+  IPos, FLen, SLen, Res: integer;
+begin
+  {FPos is global}
+  Found := False;
+  FLen := Length(findDialog1.FindText);
+  SLen := Length(editWindow.Text);
+  FindS := findDialog1.FindText;
+
+  if frMatchcase in findDialog1.Options then
+    IPos := Pos(FindS, Copy(editWindow.Text, FPos + 1, SLen - FPos))
+  else
+    IPos := Pos(AnsiUpperCase(FindS),
+      AnsiUpperCase(Copy(editWindow.Text, FPos + 1, SLen - FPos)));
+
+  if IPos > 0 then
+  begin
+    FPos := FPos + IPos;
+    //   Hoved.BringToFront;       {Edit control must have focus in }
+    editWindow.SetFocus;
+    Self.ActiveControl := editWindow;
+    editWindow.SelStart := FPos;  // {Select the string found by POS
+    setSelLength(editWindow, FLen);     //editWindow.SelLength := FLen;
+    Found := True;
+    FPos := FPos + FLen - 1;   //move just past end of found item
+
+  end
+  else
+  begin
+    Res := Application.MessageBox('Text was not found!', 'Find',
+      mb_OK + mb_ICONWARNING);
+    FPos := 0;     //user might cancel dialog, so setting here is not enough
+  end;             //   - also do it before exec of dialog.
+end;
+
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   isSaved := True;
@@ -150,6 +207,12 @@ end;
 procedure TForm1.mnuPasteClick(Sender: TObject);
 begin
   editWindow.PasteFromClipboard;
+end;
+
+procedure TForm1.mnuReplaceClick(Sender: TObject);
+begin
+  FPos := 0;
+  replaceDialog1.Execute;
 end;
 
 procedure TForm1.mnuSaveAsClick(Sender: TObject);
@@ -187,6 +250,82 @@ begin
   editWindow.Undo;
 end;
 
+procedure TForm1.ReplaceDialog1Find(Sender: TObject);
+var
+  FindS: string;
+  IPos, FLen, SLen: integer;
+  Res: integer;
+begin
+  {FPos is global}
+  Found := False;
+  FLen := Length(ReplaceDialog1.FindText);
+  SLen := Length(editWindow.Text);
+  FindS := ReplaceDialog1.FindText;
+
+  if frMatchcase in ReplaceDialog1.Options then
+    IPos := Pos(FindS, Copy(editWindow.Text, FPos + 1, SLen - FPos))
+  else
+    IPos := Pos(AnsiUpperCase(FindS), AnsiUpperCase(
+      Copy(editWindow.Text, FPos + 1, SLen - FPos)));
+
+  if IPos > 0 then
+  begin
+    FPos := FPos + IPos;
+    // Edit control must have focus
+    editWindow.SetFocus;
+    Self.ActiveControl := editWindow;
+    editWindow.SelStart := FPos;  // Select the string found by POS
+    setSelLength(editWindow, FLen);     //editWindow.SelLength := FLen;
+    Found := True;
+    FPos := FPos + FLen - 1;   //move just past end of found item
+  end
+  else
+  begin
+    if not (ReplaceDialog1.Options * [frReplaceAll] = [frReplaceAll]) then
+      Res := Application.MessageBox('Text was not found!', 'Replace',
+        mb_OK + mb_ICONWARNING);
+    FPos := 0;     // user might cancel dialog, so setting here is not enough
+  end;             //   - also do it before exec of dialog.
+
+end;
+
+procedure TForm1.ReplaceDialog1Replace(Sender: TObject);
+var
+  Res, replaceCount: integer;
+  countInfo: string;
+begin
+  if Found = False then  //If no search for string took place
+  begin
+    ReplaceDialog1Find(Sender); // Search for string, replace if found
+    if Length(editWindow.SelText) > 0 then
+      editWindow.SelText := ReplaceDialog1.ReplaceText;
+  end
+  else                          //If search ran, replace string
+  begin
+    if Length(editWindow.SelText) > 0 then
+      editWindow.SelText := ReplaceDialog1.ReplaceText;
+  end;
+  Found := False;
+  setSelLength(editWindow, 0);    //editWindow.SelLength := 0;
+  if (ReplaceDialog1.Options * [frReplaceAll] = [frReplaceAll]) then
+  begin
+    replaceCount := 0;
+    repeat
+      ReplaceDialog1Find(Sender); {Search for string, replace if found}
+      if Length(editWindow.SelText) > 0 then
+      begin
+        editWindow.SelText := ReplaceDialog1.ReplaceText;
+        replaceCount := replaceCount + 1;
+      end;
+    until Found = False;
+    if replaceCount > 0 then
+      replaceCount := replaceCount + 1;   //the first 1, then loop for rest
+    countInfo := IntToStr(replaceCount) + '  replacements made.';
+    Res := Application.MessageBox(PChar(countInfo), 'Replace', mb_OK +
+      mb_ICONINFORMATION);
+  end;
+end;
+
 procedure TForm1.savePrompt; // If file has been amended but not saved
 begin
   if MessageDlg('Save changes?', 'Do you want to save this file?',
@@ -194,5 +333,9 @@ begin
     mnuSaveClick(nil);
 end;
 
-end.
+procedure TForm1.setSelLength(var textComponent: TSynEdit; newValue: integer);
+begin
+  textComponent.SelEnd := textComponent.SelStart + newValue;
+end;
 
+end.

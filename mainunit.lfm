@@ -688,6 +688,19 @@ object Form1: TForm1
         ShortCut = 16470
         OnClick = mnuPasteClick
       end
+      object dividerX: TMenuItem
+        Caption = '-'
+      end
+      object mnuFind: TMenuItem
+        Caption = '&Find'
+        ShortCut = 16454
+        OnClick = mnuFindClick
+      end
+      object mnuReplace: TMenuItem
+        Caption = 'Find && Replace'
+        ShortCut = 16456
+        OnClick = mnuReplaceClick
+      end
     end
     object MenuItem4: TMenuItem
       Caption = '&View'
@@ -998,6 +1011,18 @@ object Form1: TForm1
     SymbolAttri.Foreground = 16448250
     VariableAttri.Foreground = 7044583
     left = 371
+    top = 64
+  end
+  object FindDialog1: TFindDialog
+    OnFind = FindDialog1Find
+    left = 448
+    top = 64
+  end
+  object ReplaceDialog1: TReplaceDialog
+    Options = [frDown, frReplace, frReplaceAll, frHidePromptOnReplace]
+    OnFind = ReplaceDialog1Find
+    OnReplace = ReplaceDialog1Replace
+    left = 537
     top = 64
   end
 end
