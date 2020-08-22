@@ -53,6 +53,9 @@ type
     tbtnCut: TToolButton;
     tbtnCopy: TToolButton;
     tbtnPaste: TToolButton;
+    tbtnDivider3: TToolButton;
+    tbtnSearch: TToolButton;
+    tbtnReplace: TToolButton;
     procedure editWindowChange(Sender: TObject);
     procedure FindDialog1Find(Sender: TObject);
     procedure FormCreate(Sender: TObject);
