@@ -727,7 +727,7 @@ object Form1: TForm1
         OnClick = mnuReplaceClick
       end
     end
-    object MenuItem4: TMenuItem
+    object mnuView: TMenuItem
       Caption = '&View'
       object mnuLine: TMenuItem
         Caption = '&Line Numbers'
@@ -746,6 +746,20 @@ object Form1: TForm1
         Checked = True
         Hint = 'Toggle toolbar'
         OnClick = mnuToolbarClick
+      end
+      object viewDivider1: TMenuItem
+        Caption = '-'
+      end
+      object mnuThemes: TMenuItem
+        Caption = 'Themes'
+        object themeAcademy: TMenuItem
+          Caption = 'Dark - Academy'
+          OnClick = themeAcademyClick
+        end
+        object themePeaGreen: TMenuItem
+          Caption = 'Light - PeaGreen'
+          OnClick = themePeaGreenClick
+        end
       end
     end
   end

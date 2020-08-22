@@ -17,6 +17,10 @@ type
     FindDialog1: TFindDialog;
     lstImages: TImageList;
     dividerX: TMenuItem;
+    themeAcademy: TMenuItem;
+    themePeaGreen: TMenuItem;
+    viewDivider1: TMenuItem;
+    mnuThemes: TMenuItem;
     mnuReplace: TMenuItem;
     mnuFind: TMenuItem;
     mnmnuEditor: TMainMenu;
@@ -36,7 +40,7 @@ type
     mnuOpen: TMenuItem;
     mnuNew: TMenuItem;
     EditMenu: TMenuItem;
-    MenuItem4: TMenuItem;
+    mnuView: TMenuItem;
     dlgOpen: TOpenDialog;
     dlgSave: TSaveDialog;
     ReplaceDialog1: TReplaceDialog;
@@ -79,6 +83,8 @@ type
     procedure savePrompt;
     procedure setSelLength(var textComponent: TSynEdit; newValue: integer);
     procedure SynCompletion1Execute(Sender: TObject);
+    procedure themeAcademyClick(Sender: TObject);
+    procedure themePeaGreenClick(Sender: TObject);
   private
 
   public
@@ -407,6 +413,32 @@ begin
   Add('while');
   Add('yield');
   Add('yield_from');
+end;
+
+(* Academy dark theme *)
+procedure TForm1.themeAcademyClick(Sender: TObject);
+begin
+  editWindow.Color:=$2F1E20;
+  SynPHPSyn1.CommentAttri.Foreground := $7B7473;
+  SynPHPSyn1.IdentifierAttri.Foreground := $7656D1;
+  SynPHPSyn1.KeyAttri.Foreground := $F3C2AA;
+  SynPHPSyn1.NumberAttri.Foreground := $7656D1;
+  SynPHPSyn1.StringAttri.Foreground := $83E0FF;
+  SynPHPSyn1.SymbolAttri.Foreground := $FAFAFA;
+  SynPHPSyn1.VariableAttri.Foreground := $6B7DE7;
+end;
+
+(* PeaGreen light theme *)
+procedure TForm1.themePeaGreenClick(Sender: TObject);
+begin
+  editWindow.Color:=$FAFAFA;
+  SynPHPSyn1.CommentAttri.Foreground := $5B805C;
+  SynPHPSyn1.IdentifierAttri.Foreground := $A2502A;
+  SynPHPSyn1.KeyAttri.Foreground := $722674;
+  SynPHPSyn1.NumberAttri.Foreground := $16526E;
+  SynPHPSyn1.StringAttri.Foreground := $346B35;
+  SynPHPSyn1.SymbolAttri.Foreground := $383332;
+  SynPHPSyn1.VariableAttri.Foreground := $313998;
 end;
 
 end.
