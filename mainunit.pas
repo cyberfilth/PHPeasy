@@ -382,6 +382,7 @@ begin
   Add('for');
   Add('foreach');
   Add('function');
+  Add('gettype()');
   Add('global');
   Add('goto');
   Add('implements');
@@ -406,6 +407,10 @@ begin
   Add('return');
   Add('static');
   Add('string');
+  Add('str_repeat()');
+  Add('strrev()');
+  Add('strtolower()');
+  Add('substr_count()');
   Add('switch');
   Add('throw');
   Add('trait');
