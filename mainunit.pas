@@ -63,6 +63,8 @@ type
     tbtnReplace: TToolButton;
     XMLPropStorage1: TXMLPropStorage;
     procedure editWindowChange(Sender: TObject);
+    procedure editWindowKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState
+      );
     procedure FindDialog1Find(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
@@ -110,7 +112,7 @@ begin
     savePrompt;
   sFileName := '';
   editWindow.Lines.Clear;
-  sbarStatus.SimpleText := '';
+  sbarStatus.Panels[1].Text := 'untitled file';
   isSaved := True;
   Form1.Caption := 'PHPeasy';
 end;
@@ -157,6 +159,13 @@ begin
     isSaved := False;
     Form1.Caption := 'PHPeasy *';
   end;
+  //sbarStatus.Caption:=IntToStr(editWindow.CaretY);
+end;
+
+procedure TForm1.editWindowKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  sbarStatus.Panels[0].Text := 'Line '+IntToStr(editWindow.CaretY) + ', Column '+IntToStr(editWindow.CaretX);
 end;
 
 procedure TForm1.FindDialog1Find(Sender: TObject);
@@ -211,7 +220,7 @@ begin
   begin
     sFileName := dlgOpen.FileName;
     editWindow.Lines.LoadFromFile(sFileName);
-    sbarStatus.SimpleText := ExtractFileName(sFileName);
+    sbarStatus.Panels[1].Text := ExtractFileName(sFileName);
     isSaved := True;
     Form1.Caption := 'PHPeasy';
   end;
@@ -234,7 +243,7 @@ begin
   begin
     sFileName := dlgSave.FileName;
     editWindow.Lines.SaveToFile(sFileName);
-    sbarStatus.SimpleText := ExtractFileName(sFileName);
+    sbarStatus.Panels[1].Text := ExtractFileName(sFileName);
     isSaved := True;
     Form1.Caption := 'PHPeasy';
   end;

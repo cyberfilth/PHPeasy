@@ -24,6 +24,7 @@ object Form1: TForm1
     ParentColor = False
     ParentFont = False
     TabOrder = 0
+    OnKeyUp = editWindowKeyUp
     Gutter.Width = 57
     Gutter.MouseActions = <>
     RightGutter.Width = 0
@@ -516,8 +517,15 @@ object Form1: TForm1
     Top = 467
     Width = 761
     AutoHint = True
-    Panels = <>
+    Panels = <    
+      item
+        Width = 150
+      end    
+      item
+        Width = 50
+      end>
     ParentShowHint = False
+    SimplePanel = False
     ShowHint = True
   end
   object tbarMain: TToolBar
