@@ -737,6 +737,15 @@ object Form1: TForm1
         ShortCut = 16456
         OnClick = mnuReplaceClick
       end
+      object dividerY: TMenuItem
+        Caption = '-'
+      end
+      object mnuCommentLine: TMenuItem
+        Caption = 'Comment out line'
+        Hint = 'Comment out current line'
+        ShortCut = 16575
+        OnClick = mnuCommentLineClick
+      end
     end
     object mnuView: TMenuItem
       Caption = '&View'

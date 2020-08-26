@@ -17,6 +17,8 @@ type
     FindDialog1: TFindDialog;
     lstImages: TImageList;
     dividerX: TMenuItem;
+    dividerY: TMenuItem;
+    mnuCommentLine: TMenuItem;
     themeAcademy: TMenuItem;
     themePeaGreen: TMenuItem;
     viewDivider1: TMenuItem;
@@ -66,6 +68,7 @@ type
     procedure editWindowKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FindDialog1Find(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure mnuCommentLineClick(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
     procedure mnuCutClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
@@ -210,6 +213,24 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   isSaved := True;
   XMLPropStorage1.FileName := GetUserDir + 'PHPeasySettings.xml';
+end;
+
+procedure TForm1.mnuCommentLineClick(Sender: TObject);
+var
+  selectedLine: integer;
+begin
+  if (editWindow.BlockBegin.y <> editWindow.BlockEnd.y) then
+  begin
+    for selectedLine := editWindow.BlockBegin.y to editWindow.BlockEnd.y do
+    begin
+      editWindow.Lines[selectedLine - 1] := '//' + editWindow.Lines[selectedLine];
+    end;
+  end
+  else
+  begin
+    editWindow.CaretX := 0;
+    editWindow.InsertTextAtCaret('//');
+  end;
 end;
 
 procedure TForm1.mnuOpenClick(Sender: TObject);
