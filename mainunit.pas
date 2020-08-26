@@ -158,7 +158,8 @@ begin
     isSaved := False;
     Form1.Caption := 'PHPeasy *';
   end;
-  //sbarStatus.Caption:=IntToStr(editWindow.CaretY);
+  //autocomplete.. maybe add a timer
+  //editWindow.CommandProcessor(SynCompletion1.ExecCommandID, '', nil);
 end;
 
 procedure TForm1.editWindowKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);

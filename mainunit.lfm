@@ -455,6 +455,7 @@ object Form1: TForm1
     MouseTextActions = <>
     MouseSelActions = <>
     MaxLeftChar = 1
+    Options2 = [eoFoldedCopyPaste, eoOverwriteBlock, eoAutoHideCursor]
     VisibleSpecialChars = [vscSpace, vscTabAtLast]
     RightEdgeColor = 3087904
     SelectedColor.BackPriority = 50
