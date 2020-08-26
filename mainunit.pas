@@ -63,8 +63,7 @@ type
     tbtnReplace: TToolButton;
     XMLPropStorage1: TXMLPropStorage;
     procedure editWindowChange(Sender: TObject);
-    procedure editWindowKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState
-      );
+    procedure editWindowKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FindDialog1Find(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
@@ -162,10 +161,10 @@ begin
   //sbarStatus.Caption:=IntToStr(editWindow.CaretY);
 end;
 
-procedure TForm1.editWindowKeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TForm1.editWindowKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
-  sbarStatus.Panels[0].Text := 'Line '+IntToStr(editWindow.CaretY) + ', Column '+IntToStr(editWindow.CaretX);
+  sbarStatus.Panels[0].Text :=
+    'Line ' + IntToStr(editWindow.CaretY) + ', Column ' + IntToStr(editWindow.CaretX);
 end;
 
 procedure TForm1.FindDialog1Find(Sender: TObject);
@@ -209,7 +208,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   isSaved := True;
-  XMLPropStorage1.FileName := GetUserDir+'PHPeasySettings.xml';
+  XMLPropStorage1.FileName := GetUserDir + 'PHPeasySettings.xml';
 end;
 
 procedure TForm1.mnuOpenClick(Sender: TObject);
@@ -370,10 +369,30 @@ procedure TForm1.SynCompletion1Execute(Sender: TObject);
 
 begin
   SynCompletion1.ItemList.Clear;
+  Add('addcslashes()');
+  Add('addslashes()');
+  Add('array_keys()');
+  Add('array_key_exists()');
+  Add('array_merge()');
+  Add('array_pop()');
+  Add('array_shift()');
+  Add('array_values()');
+  Add('bin2hex()');
   Add('bool');
   Add('ceil()');
+  Add('chop()');
+  Add('chunk_split()');
+  Add('convert_cyr_str()');
+  Add('convert_uudecode()');
+  Add('convert_uuencode()');
   Add('count()');
+  Add('count_chars()');
+  Add('crc32()');
+  Add('crypt()');
+  Add('date()');
   Add('die()');
+  Add('dirname()');
+  Add('defined()');
   Add('echo');
   Add('else');
   Add('elseif');
@@ -386,6 +405,7 @@ begin
   Add('endwhile');
   Add('eval()');
   Add('exit()');
+  Add('explode()');
   Add('extends');
   Add('false');
   Add('file_get_contents()');
@@ -395,25 +415,45 @@ begin
   Add('float');
   Add('for');
   Add('foreach');
+  Add('fprintf()');
   Add('function');
+  Add('function_exists()');
   Add('getenv()');
+  Add('get_html_translation_table()');
   Add('getrandmax()');
   Add('gettype()');
   Add('global');
   Add('goto');
   Add('header()');
+  Add('hebrev()');
+  Add('hebrevc()');
+  Add('hex2bin()');
+  Add('html_entity_decode()');
   Add('htmlentities()');
+  Add('htmlspecialchars_decode');
+  Add('htmlspecialchars()');
   Add('implements');
+  Add('implode()');
   Add('include');
   Add('include_once');
   Add('ini_set()');
   Add('instanceof');
   Add('insteadof');
   Add('interface');
+  Add('in_array()');
+  Add('is_array()');
+  Add('is_dir()');
+  Add('is_null()');
+  Add('is_numeric()');
+  Add('is_object()');
   Add('isset()');
   Add('iterable');
+  Add('json_encode()');
+  Add('json_decode()');
   Add('list()');
+  Add('ltrim()');
   Add('mail');
+  Add('method_exists()');
   Add('mkdir');
   Add('namespace');
   Add('new');
@@ -430,16 +470,23 @@ begin
   Add('require');
   Add('require_once');
   Add('return');
+  Add('rtrim()');
+  Add('sprintf()');
   Add('static');
   Add('string');
-  Add('str_len()');
+  Add('strlen()');
+  Add('str_pad()');
+  Add('strpos()');
   Add('str_repeat()');
   Add('str_replace()');
   Add('strrev()');
   Add('strtolower()');
+  Add('strtoupper()');
+  Add('substr()');
   Add('substr_count()');
   Add('switch');
   Add('throw');
+  Add('time()');
   Add('trait');
   Add('trim()');
   Add('true');
