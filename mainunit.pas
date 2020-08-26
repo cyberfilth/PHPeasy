@@ -223,7 +223,7 @@ begin
   begin
     for selectedLine := editWindow.BlockBegin.y to editWindow.BlockEnd.y do
     begin
-      editWindow.Lines[selectedLine - 1] := '//' + editWindow.Lines[selectedLine];
+      editWindow.Lines[selectedLine - 1] := '//' + editWindow.Lines[selectedLine - 1];
     end;
   end
   else

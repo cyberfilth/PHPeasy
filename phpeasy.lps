@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="11"/>
-    <BuildModes Active="Debug"/>
+    <BuildModes Active="Release"/>
     <Units Count="7">
       <Unit0>
         <Filename Value="phpeasy.lpr"/>
@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="mainUnit"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="216"/>
-        <CursorPos X="83" Y="226"/>
+        <TopLine Value="213"/>
+        <CursorPos X="85" Y="226"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
