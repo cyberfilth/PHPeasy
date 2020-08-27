@@ -71,6 +71,7 @@ type
     tbtnReplace: TToolButton;
     XMLPropStorage1: TXMLPropStorage;
     procedure editWindowChange(Sender: TObject);
+    procedure editWindowClick(Sender: TObject);
     procedure editWindowKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FindDialog1Find(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -169,6 +170,12 @@ begin
   end;
   //autocomplete.. maybe add a timer
   //editWindow.CommandProcessor(SynCompletion1.ExecCommandID, '', nil);
+end;
+
+procedure TForm1.editWindowClick(Sender: TObject);
+begin
+  sbarStatus.Panels[0].Text :=
+    'Line ' + IntToStr(editWindow.CaretY) + ', Column ' + IntToStr(editWindow.CaretX);
 end;
 
 procedure TForm1.editWindowKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);

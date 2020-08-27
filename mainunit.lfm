@@ -25,6 +25,7 @@ object Form1: TForm1
     ParentFont = False
     PopupMenu = rightClickMenu
     TabOrder = 0
+    OnClick = editWindowClick
     OnKeyUp = editWindowKeyUp
     Gutter.Width = 57
     Gutter.MouseActions = <>
