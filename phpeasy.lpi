@@ -20,9 +20,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <MinorVersionNr Value="1"/>
-      <RevisionNr Value="8"/>
-      <BuildNr Value="5"/>
+      <MajorVersionNr Value="1"/>
       <Language Value="0809"/>
       <Attributes pvaDebug="True"/>
       <StringTable Comments="Light code editor for PHP" CompanyName="Chris Hawkins" FileDescription="Light code editor for PHP" ProductName="PHPeasy"/>

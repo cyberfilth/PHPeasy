@@ -94,7 +94,9 @@ type
     procedure ReplaceDialog1Replace(Sender: TObject);
     procedure savePrompt;
     procedure setSelLength(var textComponent: TSynEdit; newValue: integer);
+    procedure populateListofWords;
     procedure SynCompletion1Execute(Sender: TObject);
+    procedure SynCompletion1SearchPosition(var APosition: integer);
     procedure themeAcademyClick(Sender: TObject);
     procedure themePeaGreenClick(Sender: TObject);
   private
@@ -421,7 +423,7 @@ begin
   textComponent.SelEnd := textComponent.SelStart + newValue;
 end;
 
-procedure TForm1.SynCompletion1Execute(Sender: TObject);
+procedure TForm1.populateListofWords;
 
   procedure Add(s: string);
   begin
@@ -557,6 +559,21 @@ begin
   Add('while');
   Add('yield');
   Add('yield_from');
+end;
+
+
+procedure TForm1.SynCompletion1Execute(Sender: TObject);
+begin
+  populateListofWords;
+end;
+
+procedure TForm1.SynCompletion1SearchPosition(var APosition: integer);
+begin
+  populateListofWords;
+  if SynCompletion1.ItemList.Count > 0 then
+    APosition := 0
+  else
+    APosition := -1;
 end;
 
 (* Academy dark theme *)

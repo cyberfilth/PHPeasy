@@ -1219,6 +1219,7 @@ object Form1: TForm1
     OnExecute = SynCompletion1Execute
     Position = 0
     LinesInWindow = 6
+    OnSearchPosition = SynCompletion1SearchPosition
     SelectedColor = clHighlight
     CaseSensitive = False
     Width = 262
