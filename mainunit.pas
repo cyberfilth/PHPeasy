@@ -220,16 +220,27 @@ var
   selectedLine: integer;
   p1, p2: TPoint;
 begin
-  (* check if more than 1 line is selected *)
+  (* check if multiple lines are selected *)
   if (editWindow.BlockBegin.y <> editWindow.BlockEnd.y) then
   begin
     for selectedLine := editWindow.BlockBegin.y to editWindow.BlockEnd.y do
     begin
-      editWindow.Lines[selectedLine - 1] := '//' + editWindow.Lines[selectedLine - 1];
+      (* Uncomment a line *)
+      if (LeftStr(editWindow.Lines[selectedLine - 1], 2) = '//') then
+      begin
+        p1.y := selectedLine;
+        p1.x := 0;
+        p2 := p1;
+        p2.x := p2.x + 3;
+        editWindow.TextBetweenPoints[p1, p2] := '';
+      end
+      else
+        (* Comment out a line *)
+        editWindow.Lines[selectedLine - 1] := '//' + editWindow.Lines[selectedLine - 1];
     end;
   end
   else
-    (* if 1 line is selected *)
+    (* if only 1 line is selected *)
   begin
     (* Uncomment a line *)
     if (LeftStr(editWindow.Lines[editWindow.BlockBegin.y - 1], 2) = '//') then
@@ -241,7 +252,7 @@ begin
       editWindow.TextBetweenPoints[p1, p2] := '';
     end
     else
-    (* Comment out a line *)
+      (* Comment out a line *)
     begin
       editWindow.CaretX := 0;
       editWindow.InsertTextAtCaret('//');
