@@ -18,7 +18,13 @@ type
     lstImages: TImageList;
     dividerX: TMenuItem;
     dividerY: TMenuItem;
+    rcComment: TMenuItem;
+    rcDivide: TMenuItem;
+    rcPaste: TMenuItem;
+    rcCopy: TMenuItem;
+    rcCut: TMenuItem;
     mnuCommentLine: TMenuItem;
+    rightClickMenu: TPopupMenu;
     themeAcademy: TMenuItem;
     themePeaGreen: TMenuItem;
     viewDivider1: TMenuItem;

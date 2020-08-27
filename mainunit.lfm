@@ -23,6 +23,7 @@ object Form1: TForm1
     Font.Quality = fqCleartypeNatural
     ParentColor = False
     ParentFont = False
+    PopupMenu = rightClickMenu
     TabOrder = 0
     OnKeyUp = editWindowKeyUp
     Gutter.Width = 57
@@ -1233,5 +1234,33 @@ object Form1: TForm1
     StoredValues = <>
     left = 101
     top = 141
+  end
+  object rightClickMenu: TPopupMenu
+    Images = lstImages
+    left = 216
+    top = 141
+    object rcCut: TMenuItem
+      Caption = 'Cut'
+      ImageIndex = 5
+      OnClick = mnuCutClick
+    end
+    object rcCopy: TMenuItem
+      Caption = 'Copy'
+      ImageIndex = 6
+      OnClick = mnuCopyClick
+    end
+    object rcPaste: TMenuItem
+      Caption = 'Paste'
+      ImageIndex = 7
+      OnClick = mnuPasteClick
+    end
+    object rcDivide: TMenuItem
+      Caption = '-'
+    end
+    object rcComment: TMenuItem
+      Caption = 'Comment'
+      ImageIndex = 11
+      OnClick = mnuCommentLineClick
+    end
   end
 end
