@@ -1,6 +1,6 @@
+![Pea](pea.png)
 # PHPeasy
 ## A light PHP code editor
-![Pea](pea.png)
 
 For when you just need an editor that opens quickly to edit a PHP file.  
   
