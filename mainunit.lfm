@@ -788,12 +788,12 @@ object Form1: TForm1
   end
   object dlgOpen: TOpenDialog
     DefaultExt = '.php'
-    Filter = 'PHP files (*.php)|*.php|HTML files (*.html)|*.html|Any files (*.*)|*.*'
+    Filter = 'PHP files (*.php)|*.php|HTML files (*.html)|*.html|CSS files (*.css)|*.css|Any files (*.*)|*.*'
     left = 161
     top = 64
   end
   object dlgSave: TSaveDialog
-    Filter = 'PHP file (*.php)|*.php|HTML file (*.html)|*.html|Any file|*.*'
+    Filter = 'PHP file (*.php)|*.php|HTML file (*.html)|*.html|CSS files (*.css)|*.css|Any file|*.*'
     left = 235
     top = 64
   end
